@@ -12,28 +12,43 @@ class HomeActivityState extends State<HomeActivity> {
   static const String title = 'Contact List';
   List<Map<String,String>> contactList = [];
 
+  // form input controllers
   final TextEditingController nameController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
 
+  /**
+   * show snack bar message
+   * param String message
+   */
   showSnackBar(message, context) {
     return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: message)
     );
   }
 
+  /**
+   * add contact to the list
+   */
   addContact() {
     if (nameController.text.isNotEmpty && numberController.text.isNotEmpty) {
       setState(() {
+        // add to the list
         contactList.add({
           'name': nameController.text,
           'number': numberController.text,
         });
       });
+
+      // clear input fields
       nameController.clear();
       numberController.clear();
     }
   }
 
+  /**
+   * show alert dialog
+   * on tap delete icon button, delete contact from the list
+   */
   deleteContactWithAlert(context, index) {
     return showDialog(
         context: context,
@@ -43,13 +58,13 @@ class HomeActivityState extends State<HomeActivity> {
               title: Text('Confirmation'),
               content: Text('Are you sure for Delete?'),
               actions: [
-                IconButton(
+                IconButton( // cancel button
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.cancel_outlined, color: Colors.blue),
                 ),
-                IconButton(
+                IconButton( // delete button
                   onPressed: () {
                     setState(() {
                       contactList.removeAt(index);
@@ -87,7 +102,7 @@ class HomeActivityState extends State<HomeActivity> {
           children: [
             Padding(
               padding: EdgeInsets.all(10),
-              child: TextField(
+              child: TextField( // Name field
                   controller: nameController,
                   decoration: InputDecoration(
                     labelText: 'Name',
@@ -103,7 +118,7 @@ class HomeActivityState extends State<HomeActivity> {
             ),
             Padding(
               padding: EdgeInsets.all(10),
-              child: TextField(
+              child: TextField( // Number field
                   controller: numberController,
                   keyboardType: TextInputType.phone,
                   inputFormatters: [
@@ -124,7 +139,7 @@ class HomeActivityState extends State<HomeActivity> {
             ),
             Padding(
                 padding: EdgeInsets.all(10),
-                child: ElevatedButton(
+                child: ElevatedButton( // contact add button
                   onPressed: () {addContact();},
                   style: ElevatedButton.styleFrom(
                       elevation: 10,
@@ -141,7 +156,7 @@ class HomeActivityState extends State<HomeActivity> {
                   ),),
                 )
             ),
-            Container(
+            Container( // list container
               margin: EdgeInsets.fromLTRB(10, 50, 10, 30),
               // padding: ,
               child: ListView.builder(
@@ -150,7 +165,7 @@ class HomeActivityState extends State<HomeActivity> {
                 itemCount: contactList.length,
                 itemBuilder: (context, index) {
                   var contact = contactList[index];
-                  return Padding(
+                  return Padding( // list item
                     padding: EdgeInsets.only(bottom: 10),
                     child: GestureDetector(
                       onLongPress: () {deleteContactWithAlert(context, index);},

@@ -7,8 +7,8 @@ class ContactApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Contact App',
-      debugShowCheckedModeBanner: false,
+      title: 'Contact App', // app title
+      debugShowCheckedModeBanner: false, // remove debug tag
       home: HomeActivity()
     );
   }
