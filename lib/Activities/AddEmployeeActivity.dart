@@ -46,7 +46,7 @@ class AddEmployeeState extends State<AddEmployeeActivity> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 60, 20, 20),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: TextFormField(
                 controller: nameController,
                 decoration: InputDecoration(
@@ -73,7 +73,7 @@ class AddEmployeeState extends State<AddEmployeeActivity> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: TextFormField(
                 controller: salaryController,
                 keyboardType: TextInputType.number,
@@ -90,18 +90,9 @@ class AddEmployeeState extends State<AddEmployeeActivity> {
                 padding: EdgeInsets.all(20),
                 child: ElevatedButton( // contact add button
                   onPressed: () {addEmployee();},
-                  style: ElevatedButton.styleFrom(
-                      elevation: 10,
-                      backgroundColor: Colors.blueGrey,
-                      minimumSize: Size(100, 40),
-                      padding: EdgeInsets.all(10),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)
-                      )
-                  ),
                   child: Text('Add Employee', style: TextStyle(
                       fontSize: 18,
-                      color: Colors.white
+                      color: Colors.black
                   ),),
                 )
             ),
