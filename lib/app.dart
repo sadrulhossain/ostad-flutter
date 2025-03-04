@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ostad_flutter/core/utils/lang/en/Label.dart';
-import 'package:ostad_flutter/presentation/screens/ProductScreen.dart';
+import 'package:ostad_flutter/core/utils/lang/en/label.dart';
+import 'package:ostad_flutter/presentation/screens/product_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
