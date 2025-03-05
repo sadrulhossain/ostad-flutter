@@ -30,5 +30,4 @@ class ElevatedButtonDefault extends StatelessWidget{
       )),
     );
   }
-
 }

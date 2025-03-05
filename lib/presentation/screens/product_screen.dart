@@ -1,10 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:ostad_flutter/core/utils/helper.dart';
 import 'package:ostad_flutter/core/utils/lang/en/label.dart';
 import 'package:ostad_flutter/data/models/product_model.dart';
-import 'package:ostad_flutter/presentation/controllers/product_controller.dart';
+import 'package:ostad_flutter/data/repositories/product_repository.dart';
 import 'package:ostad_flutter/presentation/widgets/app_bar_default.dart';
 import 'package:ostad_flutter/presentation/widgets/elevated_button_default.dart';
 import 'package:ostad_flutter/presentation/widgets/product_card.dart';
@@ -19,29 +17,29 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductState extends State<ProductScreen> {
-  final ProductController productController = ProductController();
+  final ProductRepository productRepo = ProductRepository();
 
   Future<void> _fetchAll() async {
-    await productController.fetchAll();
+    await productRepo.fetchAll();
     setState(() {});
   }
 
   Future<void> _store(Map<String, dynamic> product) async {
     setState(() async{
-      await productController.store(product);
+      await productRepo.store(product);
       _fetchAll();
     });
   }
 
   Future<void> _update(String id, Map<String, dynamic> product) async {
     setState(() async {
-      await productController.update(id, product);
+      await productRepo.update(id, product);
       _fetchAll();
     });
   }
 
   Future<void> _delete(String id) async {
-    await productController.delete(id);
+    await productRepo.delete(id);
     setState(() {});
   }
 
@@ -179,9 +177,9 @@ class _ProductState extends State<ProductScreen> {
           ),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: productController.products.length,
+          itemCount: productRepo.products.length,
           itemBuilder: (context, index) {
-            var product = productController.products[index];
+            var product = productRepo.products[index];
             return ProductCard(
               product: product,
               onEdit: () => _productDialog(context, product: product),

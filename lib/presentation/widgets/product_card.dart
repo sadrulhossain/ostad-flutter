@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ostad_flutter/core/constants/constants.dart';
 import 'package:ostad_flutter/core/utils/lang/en/label.dart';
 import 'package:ostad_flutter/data/models/product_model.dart';
+import 'package:ostad_flutter/presentation/widgets/outlined_round_border_icon_button.dart';
 
 class ProductCard extends StatelessWidget{
   final Data product;
@@ -11,7 +13,7 @@ class ProductCard extends StatelessWidget{
     super.key,
     required this.product,
     required this.onEdit,
-    required this.onDelete
+    required this.onDelete,
   });
 
   @override
@@ -33,13 +35,26 @@ class ProductCard extends StatelessWidget{
         children: [
           ClipRect(
             child: Container(
+              padding: EdgeInsets.all(10),
               height: 140,
-              color: Colors.grey.shade200,
-              child: Image.network(product.img.toString(), fit: BoxFit.cover,),
+              color: Colors.white,
+              child: Image.network(
+                product.img.toString(),
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(child: CircularProgressIndicator(
+                    color: Colors.red,
+                  ));
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.network(Constants.noImage, fit: BoxFit.cover,);
+                },
+              ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -61,37 +76,24 @@ class ProductCard extends StatelessWidget{
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        onPressed: onEdit,
-                        icon: Icon(Icons.edit, color: Colors.white,),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: onDelete,
-                        icon: Icon(Icons.delete, color: Colors.white,),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-
-                        ),
-                      ),
-                    ],
-                  ),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    OutlinedRoundBorderIconButton(
+                      onPressed: onEdit,
+                      icon: Icons.edit,
+                      paddingHorizontal: 30,
+                      paddingVertical: 3,
+                    ),
+                    OutlinedRoundBorderIconButton(
+                      onPressed: onDelete,
+                      icon: Icons.delete,
+                      paddingHorizontal: 30,
+                      paddingVertical: 3,
+                      color: Colors.red,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -100,5 +102,4 @@ class ProductCard extends StatelessWidget{
       ),
     );
   }
-
 }

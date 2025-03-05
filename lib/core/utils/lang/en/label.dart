@@ -1,6 +1,5 @@
 class Label {
   static String appTitle = 'Product Management';
-
   static String productList = 'Product List';
   static String addNew = 'Add New';
   static String createNewProduct = 'Create New Product';
@@ -12,9 +11,7 @@ class Label {
   static String price = 'Price';
   static String unitPrice = 'Unit Price';
   static String totalPrice = 'Total Price';
-
   static String deleteProduct = 'Delete Product';
-
   static String save = 'Save';
   static String update = 'Update';
   static String delete = 'Delete';

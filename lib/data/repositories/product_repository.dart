@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:ostad_flutter/data/models/product_model.dart';
-import 'package:ostad_flutter/data/sources/apis.dart';
+import 'package:ostad_flutter/data/sources/remote/apis.dart';
 
-class  ProductController {
+class  ProductRepository {
   List<Data> products = [];
 
   Future<void> fetchAll() async {
@@ -38,8 +37,6 @@ class  ProductController {
         },
         body: jsonEncode(_formatData(product))
     );
-
-    print(response);
 
     if (response.statusCode == 200) {
       await fetchAll();

@@ -22,7 +22,6 @@ class RoundFloatingActionButton extends StatelessWidget{
       backgroundColor: backgroundColor,
       shape: CircleBorder(),
       child: Icon(icon, color: color),
-
     );
   }
 
